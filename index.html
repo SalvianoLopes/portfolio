@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salviano Lopes — Logística + Engenharia de Software</title>
+    <meta name="description" content="Full-Stack Engineer com 20+ anos em logística e operações. Especializado em transformar processos em plataformas digitais escaláveis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-light: #34D399;
+            --primary-dark: #059669;
+            --secondary: #0EA5E9;
+            --secondary-light: #38BDF8;
+            --accent: #F59E0B;
+            --dark: #0F172A;
+            --dark-card: #1E293B;
+            --dark-border: #334155;
+            --light: #F8FAFC;
+            --light-card: #FFFFFF;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── REVEAL ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.35);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.7);
+            transform: translateY(-2px);
+        }
+        .btn-outline-dark {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+        .btn-outline-dark:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            padding: 13px 0;
+            font-size: 14px;
+        }
+        .btn-ghost:hover { color: #fff; }
+        .btn-ghost svg { opacity: 0.7; }
+        .btn-sm { padding: 9px 18px; font-size: 13px; border-radius: 8px; }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 22px 0;
+            transition: all 0.35s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 14px 0;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            flex-shrink: 0;
+        }
+        .nav-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        .navbar.scrolled .nav-name { color: var(--text); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .navbar.scrolled .nav-links a { color: var(--muted); }
+        .navbar.scrolled .nav-links a:hover { color: var(--text); background: var(--light); }
+        .nav-cta {
+            background: var(--primary) !important;
+            color: #fff !important;
+            border-radius: 8px;
+        }
+        .nav-cta:hover { background: var(--primary-dark) !important; color: #fff !important; }
+        .nav-mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: #fff;
+        }
+        .navbar.scrolled .nav-mobile-btn { color: var(--text); }
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--dark);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .nav-mobile-menu.open { display: flex; }
+        .nav-mobile-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 12px;
+            transition: all 0.2s;
+            text-align: center;
+            width: 80%;
+        }
+        .nav-mobile-menu a:hover { background: rgba(255,255,255,0.08); }
+        .nav-mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--dark);
+            padding: 140px 0 90px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
+        }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 56px 56px;
+        }
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: var(--primary-light);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            letter-spacing: 0.3px;
+        }
+        .hero-eyebrow span { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; display: inline-block; }
+        .hero h1 {
+            font-size: clamp(44px, 5vw, 64px);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+        .hero-subtitle {
+            font-size: clamp(18px, 2.2vw, 22px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            max-width: 540px;
+        }
+        .hero-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 32px;
+            line-height: 1.75;
+            max-width: 480px;
+        }
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: 8px;
+        }
+        .hero-badge svg { color: var(--primary); flex-shrink: 0; }
+        .hero-ctas {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero-right { position: relative; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+        .photo-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            flex-shrink: 0;
+        }
+        .photo-ring {
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 2px solid rgba(16, 185, 129, 0.25);
+        }
+        .photo-ring-2 {
+            position: absolute;
+            inset: -24px;
+            border-radius: 50%;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        .photo-glow {
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border: 3px solid rgba(16, 185, 129, 0.4);
+        }
+        .hero-kpis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+        .hero-kpi {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .hero-kpi:hover { background: rgba(255,255,255,0.07); border-color: rgba(16,185,129,0.2); }
+        .kpi-number {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* ── VALUE PROPS ── */
+        .value-props {
+            background: #fff;
+            padding: 88px 0;
+        }
+        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 14px;
+        }
+        .section-title {
+            font-size: clamp(28px, 3.5vw, 40px);
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--muted);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.65;
+        }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .value-card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .value-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--card-accent, var(--primary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .value-card:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
+        .value-card:hover::after { transform: scaleX(1); }
+        .value-card.green { --card-accent: var(--primary); }
+        .value-card.blue { --card-accent: var(--secondary); }
+        .value-card.amber { --card-accent: var(--accent); }
+        .value-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .value-icon.green { background: rgba(16, 185, 129, 0.1); }
+        .value-icon.blue { background: rgba(14, 165, 233, 0.1); }
+        .value-icon.amber { background: rgba(245, 158, 11, 0.1); }
+        .value-card h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; letter-spacing: -0.3px; }
+        .value-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+        /* ── FEATURED CASE ── */
+        .featured-case {
+            background: var(--light);
+            padding: 88px 0;
+        }
+        .featured-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .featured-preview-wrap {
+            position: relative;
+        }
+        .featured-preview-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+            border-radius: 24px;
+        }
+        .featured-preview {
+            background: var(--dark);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .preview-topbar {
+            background: var(--dark-card);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 7px;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        .preview-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .preview-dot.red { background: #FF5F56; }
+        .preview-dot.yellow { background: #FFBD2E; }
+        .preview-dot.green { background: #27C93F; }
+        .preview-tab {
+            margin-left: 12px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 5px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+        .preview-body { padding: 20px; }
+        .preview-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+        .preview-stat {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .ps-num { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 3px; }
+        .ps-lbl { font-size: 10px; color: rgba(255,255,255,0.3); }
+        .preview-chart { height: 100px; position: relative; overflow: hidden; margin-bottom: 14px; }
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+        }
+        .preview-table { }
+        .preview-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .pr-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .pr-label { font-size: 11px; color: rgba(255,255,255,0.4); flex: 1; }
+        .pr-bar-wrap { width: 80px; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; }
+        .pr-bar { height: 100%; border-radius: 3px; }
+        .pr-val { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; width: 36px; text-align: right; }
+
+        .featured-content {}
+        .featured-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .featured-content h2 {
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .case-block { margin-bottom: 20px; }
+        .case-block-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
+        .case-block p { font-size: 15px; color: var(--text); line-height: 1.7; }
+        .case-stack-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 7px; }
+        .stack-badge {
+            background: var(--light);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 6px;
+        }
+        .case-impact {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 7px;
+        }
+        .impact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text);
+        }
+        .impact-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; flex-shrink: 0; }
+        .featured-ctas { display: flex; gap: 12px; margin-top: 28px; }
+
+        /* ── PROJECTS ── */
+        .projects {
+            background: #fff;
+            padding: 88px 0;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+        .project-card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        .card-preview {
+            background: var(--dark);
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        .card-preview-bar {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .card-preview-topbar {
+            background: rgba(255,255,255,0.04);
+            height: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            gap: 6px;
+        }
+        .card-preview-topbar .d { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+        .card-preview-content { padding: 14px; display: flex; gap: 10px; flex-direction: column; }
+        .cp-row { display: flex; gap: 8px; }
+        .cp-box {
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.05);
+            flex: 1;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 8px;
+        }
+        .cp-box .cp-icon { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
+        .cp-box .cp-line { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); flex: 1; }
+        .cp-chart {
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.05);
+            height: 68px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cp-bars { display: flex; align-items: flex-end; gap: 4px; position: absolute; bottom: 10px; left: 12px; right: 12px; height: 50px; }
+        .cp-bar { flex: 1; border-radius: 3px 3px 0 0; }
+
+        .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+        .card-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+        .card-body h3 { font-size: 19px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; margin-bottom: 10px; }
+        .card-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+        .card-impact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        .card-impact-item { font-size: 12px; color: var(--primary-dark); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .card-impact-item::before { content: '→'; color: var(--primary); font-size: 11px; }
+        .card-stack-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+        .tech-pill {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: rgba(14, 165, 233, 0.08);
+            color: #0284C7;
+            border: 1px solid rgba(14, 165, 233, 0.15);
+        }
+        .card-links { display: flex; gap: 10px; }
+        .card-link {
+            flex: 1;
+            padding: 10px 16px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+        .card-link-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .card-link-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .card-link-secondary {
+            background: var(--light-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .card-link-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+
+        /* ── STACK ── */
+        .stack-section {
+            background: var(--light);
+            padding: 88px 0;
+        }
+        .stack-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .stack-category {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+        .stack-cat-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .stack-cat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+        .stack-cat-header h3 { font-size: 15px; font-weight: 700; color: var(--text); }
+        .stack-items { display: flex; flex-direction: column; gap: 12px; }
+        .stack-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+            cursor: default;
+        }
+        .stack-item:hover { background: var(--light); }
+        .stack-item-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+        .stack-item-info { flex: 1; min-width: 0; }
+        .stack-item-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+        .stack-item-desc { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* ── ABOUT ── */
+        .about-section {
+            background: var(--dark);
+            padding: 88px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .about-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 18px;
+        }
+        .about-text h2 {
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .about-text h2 em { color: var(--primary); font-style: normal; }
+        .about-quote {
+            font-size: 17px;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .about-quote strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+        .about-side { display: flex; flex-direction: column; gap: 16px; }
+        .about-stat-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 20px 24px;
+            transition: all 0.3s;
+        }
+        .about-stat-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(16,185,129,0.2); }
+        .about-stat-num { font-size: 32px; font-weight: 800; color: var(--primary); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+        .about-stat-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+        /* ── CONTACT ── */
+        .contact-section {
+            background: #fff;
+            padding: 88px 0;
+        }
+        .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+        .contact-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 16px; }
+        .contact-inner h2 {
+            font-size: clamp(28px, 3.5vw, 42px);
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+        .contact-inner h2 span { color: var(--primary); }
+        .contact-sub {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        .contact-body {
+            font-size: 16px;
+            color: var(--muted);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+        .contact-ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; margin-bottom: 32px; }
+        .btn-contact-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        .btn-contact-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4); }
+        .btn-contact-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+        .btn-contact-outline:hover { border-color: var(--secondary); color: var(--secondary); transform: translateY(-2px); }
+        .contact-availability {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .avail-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+        .avail-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark);
+            padding: 32px 0;
+            border-top: 1px solid var(--dark-border);
+        }
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .footer-name { font-size: 14px; color: rgba(255,255,255,0.5); }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: rgba(255,255,255,0.7); }
+        .footer-copy { font-size: 13px; color: rgba(255,255,255,0.2); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+            .hero-right { flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+            .hero-kpis { max-width: 320px; }
+            .featured-inner { grid-template-columns: 1fr; }
+            .about-inner { grid-template-columns: 1fr; }
+            .about-side { flex-direction: row; flex-wrap: wrap; }
+            .about-stat-card { flex: 1; min-width: 200px; }
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 110px 0 60px; }
+            .hero h1 { letter-spacing: -1.5px; }
+            .nav-links { display: none; }
+            .nav-mobile-btn { display: flex; }
+            .value-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .stack-categories { grid-template-columns: 1fr; }
+            .hero-kpis { grid-template-columns: repeat(2, 1fr); }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            .contact-ctas { flex-direction: column; align-items: center; }
+            .hero-ctas { flex-direction: column; align-items: flex-start; }
+            .featured-ctas { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ──────────────────── NAVBAR ──────────────────── -->
+<header class="navbar" id="navbar">
+    <div class="container">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <div class="nav-logo">SL</div>
+                <span class="nav-name">Salviano Lopes</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#projetos">Projetos</a>
+                <a href="#stack">Stack</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato" class="nav-cta">Vamos conversar</a>
+            </nav>
+            <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="nav-mobile-menu" id="mobileMenu">
+    <button class="nav-mobile-close" id="mobileMenuClose">✕</button>
+    <a href="#projetos" class="mobile-link">Projetos</a>
+    <a href="#stack" class="mobile-link">Stack</a>
+    <a href="#sobre" class="mobile-link">Sobre</a>
+    <a href="#contato" class="mobile-link" style="color: var(--primary);">Vamos conversar</a>
+</nav>
+
+<!-- ──────────────────── HERO ──────────────────── -->
+<section class="hero">
+    <div class="hero-grid"></div>
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-eyebrow">
+                    <span></span>
+                    Logística · Engenharia de Software · Dados
+                </div>
+                <h1>Salviano<br>Lopes</h1>
+                <p class="hero-subtitle">Transformo processos logísticos e operacionais em plataformas escaláveis</p>
+                <p class="hero-desc">20 anos construindo operações. Hoje, construo também o software que as move. Sistemas em produção, dados em tempo real, decisões mais rápidas.</p>
+                <div class="hero-badges">
+                    <span class="hero-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+                        20+ anos em Logística
+                    </span>
+                    <span class="hero-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+                        Full-Stack Engineer
+                    </span>
+                    <span class="hero-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        4 Sistemas em Produção
+                    </span>
+                </div>
+                <div class="hero-ctas">
+                    <a href="#contato" class="btn btn-primary">Vamos conversar →</a>
+                    <a href="#projetos" class="btn btn-outline">Ver projetos</a>
+                    <a href="https://github.com/SalvianoLopes" target="_blank" class="btn btn-ghost">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="photo-wrapper">
+                    <div class="photo-glow"></div>
+                    <div class="photo-ring-2"></div>
+                    <div class="photo-ring"></div>
+                    <img src="foto.jpg" alt="Salviano Lopes"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22280%22%3E%3Crect fill=%22%231E293B%22 width=%22280%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2272%22 fill=%22%2310B981%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter%2C sans-serif%22 font-weight=%22900%22%3ESL%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="hero-kpis">
+                    <div class="hero-kpi">
+                        <div class="kpi-number" data-count="38.89" data-suffix="%" data-decimal="2">0%</div>
+                        <div class="kpi-label">Redução de custos<br>operacionais</div>
+                    </div>
+                    <div class="hero-kpi">
+                        <div class="kpi-number" data-count="98" data-suffix="%">0%</div>
+                        <div class="kpi-label">SLA operacional<br>sustentado</div>
+                    </div>
+                    <div class="hero-kpi">
+                        <div class="kpi-number" data-count="91" data-suffix="">0</div>
+                        <div class="kpi-label">NPS score<br>conquistado</div>
+                    </div>
+                    <div class="hero-kpi">
+                        <div class="kpi-number" data-count="4" data-suffix="">0</div>
+                        <div class="kpi-label">Produtos ativos<br>em produção</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── VALUE PROPS ──────────────────── -->
+<section class="value-props">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">O que eu entrego</div>
+            <h2 class="section-title">Operação vira produto.</h2>
+            <p class="section-subtitle">Cada sistema nasce de um problema real. Não de especificações abstratas.</p>
+        </div>
+        <div class="value-grid">
+            <div class="value-card green reveal reveal-delay-1">
+                <div class="value-icon green">📊</div>
+                <h3>Dashboards e Inteligência Operacional</h3>
+                <p>Indicadores críticos em tempo real, com metas, alertas e histórico. Substituo planilhas por painéis que a operação realmente usa — e que gestores realmente confiam.</p>
+            </div>
+            <div class="value-card blue reveal reveal-delay-2">
+                <div class="value-icon blue">⚙️</div>
+                <h3>Sistemas Internos para Logística</h3>
+                <p>Plataformas completas para frota, rotas, entregas e controles operacionais. Construídas com lógica de quem já operou, não apenas com lógica de código.</p>
+            </div>
+            <div class="value-card amber reveal reveal-delay-3">
+                <div class="value-icon amber">🔄</div>
+                <h3>Automação e Centralização de Rotinas</h3>
+                <p>Processos dispersos em planilhas, e-mails e controles manuais, reunidos em um único sistema. Menos reconciliação manual, mais decisão baseada em dados.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── FEATURED CASE ──────────────────── -->
+<section class="featured-case">
+    <div class="container">
+        <div class="featured-inner">
+            <div class="featured-preview-wrap reveal">
+                <div class="featured-preview">
+                    <div class="preview-topbar">
+                        <div class="preview-dot red"></div>
+                        <div class="preview-dot yellow"></div>
+                        <div class="preview-dot green"></div>
+                        <div class="preview-tab">Sistema de Rotas · Produção</div>
+                    </div>
+                    <div class="preview-body">
+                        <div class="preview-stat-row">
+                            <div class="preview-stat">
+                                <div class="ps-num" style="color:#10B981">142</div>
+                                <div class="ps-lbl">Rotas ativas</div>
+                            </div>
+                            <div class="preview-stat">
+                                <div class="ps-num" style="color:#0EA5E9">38</div>
+                                <div class="ps-lbl">Motoristas</div>
+                            </div>
+                            <div class="preview-stat">
+                                <div class="ps-num" style="color:#F59E0B">94%</div>
+                                <div class="ps-lbl">Rentabilidade</div>
+                            </div>
+                        </div>
+                        <div class="preview-chart">
+                            <svg width="100%" height="100%" viewBox="0 0 360 100" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#10B981" stop-opacity="0.3"/>
+                                        <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M0,80 C40,70 80,40 120,45 C160,50 200,25 240,30 C280,35 320,15 360,20 L360,100 L0,100Z" fill="url(#lineGrad)"/>
+                                <path d="M0,80 C40,70 80,40 120,45 C160,50 200,25 240,30 C280,35 320,15 360,20" fill="none" stroke="#10B981" stroke-width="2.5"/>
+                                <path d="M0,85 C40,82 80,75 120,70 C160,65 200,60 240,58 C280,56 320,50 360,52" fill="none" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div class="preview-table">
+                            <div class="preview-row">
+                                <div class="pr-dot" style="background:#10B981"></div>
+                                <div class="pr-label">Rota Milk Run Sul</div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:85%;background:#10B981"></div></div>
+                                <div class="pr-val">R$4.2k</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="pr-dot" style="background:#0EA5E9"></div>
+                                <div class="pr-label">Rota Expressa Centro</div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:60%;background:#0EA5E9"></div></div>
+                                <div class="pr-val">R$3.1k</div>
+                            </div>
+                            <div class="preview-row">
+                                <div class="pr-dot" style="background:#F59E0B"></div>
+                                <div class="pr-label">Rota Industrial Norte</div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:45%;background:#F59E0B"></div></div>
+                                <div class="pr-val">R$2.3k</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="featured-content reveal reveal-delay-2">
+                <div class="featured-label">Case em destaque</div>
+                <h2>Sistema de Gestão de Rotas Logísticas</h2>
+                <div class="case-block">
+                    <div class="case-block-label">Problema</div>
+                    <p>Operações de rota gerenciadas em planilhas separadas por motorista. Sem visibilidade de rentabilidade, sem histórico unificado, sem controle de sellers — e horas de reconciliação manual por semana.</p>
+                </div>
+                <div class="case-block">
+                    <div class="case-block-label">Solução</div>
+                    <p>Plataforma completa com criação de rotas, suporte a Milk Run, cálculo automático de rentabilidade, gestão de motoristas e sellers, analytics com histórico operacional e autenticação por usuário.</p>
+                </div>
+                <div class="case-block">
+                    <div class="case-block-label">Stack</div>
+                    <div class="case-stack-badges">
+                        <span class="stack-badge">React</span>
+                        <span class="stack-badge">Tailwind CSS</span>
+                        <span class="stack-badge">Supabase</span>
+                        <span class="stack-badge">Chart.js</span>
+                        <span class="stack-badge">PostgreSQL</span>
+                    </div>
+                </div>
+                <div class="case-block">
+                    <div class="case-block-label">Impacto</div>
+                    <div class="case-impact">
+                        <div class="impact-item"><div class="impact-dot"></div>Operação de rota 100% centralizada em uma plataforma</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Cálculo de rentabilidade automatizado por rota</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Visibilidade de frete e volume em tempo real</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Eliminação das planilhas descentralizadas</div>
+                    </div>
+                </div>
+                <div class="featured-ctas">
+                    <a href="https://sistema-rotas-v2.vercel.app" target="_blank" class="btn btn-primary">Ver demo ao vivo →</a>
+                    <a href="https://github.com/SalvianoLopes/-sistema-rotas-logistica-" target="_blank" class="btn btn-outline-dark">Ver código</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── PROJECTS ──────────────────── -->
+<section class="projects" id="projetos">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Projetos</div>
+            <h2 class="section-title">4 sistemas. 4 problemas resolvidos.</h2>
+            <p class="section-subtitle">Cada projeto nasceu de uma operação real. Cada um está em produção.</p>
+        </div>
+        <div class="projects-grid">
+
+            <!-- Project 1: Sistema de Rotas -->
+            <div class="project-card reveal reveal-delay-1">
+                <div class="card-preview">
+                    <div class="card-preview-bar" style="background: linear-gradient(90deg, #10B981, #34D399)"></div>
+                    <div class="card-preview-topbar">
+                        <div class="d"></div><div class="d"></div><div class="d"></div>
+                    </div>
+                    <div class="card-preview-content">
+                        <div class="cp-row">
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(16,185,129,0.2)"></div><div class="cp-line" style="width:50%;background:rgba(16,185,129,0.3)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(14,165,233,0.2)"></div><div class="cp-line" style="width:60%;background:rgba(14,165,233,0.3)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(245,158,11,0.2)"></div><div class="cp-line" style="width:40%;background:rgba(245,158,11,0.3)"></div></div>
+                        </div>
+                        <div class="cp-chart">
+                            <svg width="100%" height="68" viewBox="0 0 300 68" preserveAspectRatio="none">
+                                <path d="M0,50 C50,40 100,20 150,25 C200,30 250,10 300,15 L300,68 L0,68Z" fill="rgba(16,185,129,0.1)"/>
+                                <path d="M0,50 C50,40 100,20 150,25 C200,30 250,10 300,15" fill="none" stroke="#10B981" stroke-width="2"/>
+                            </svg>
+                            <div class="cp-bars" style="bottom:0;height:40px">
+                                <div class="cp-bar" style="height:80%;background:rgba(16,185,129,0.4)"></div>
+                                <div class="cp-bar" style="height:60%;background:rgba(16,185,129,0.4)"></div>
+                                <div class="cp-bar" style="height:90%;background:rgba(16,185,129,0.6)"></div>
+                                <div class="cp-bar" style="height:50%;background:rgba(16,185,129,0.4)"></div>
+                                <div class="cp-bar" style="height:70%;background:rgba(16,185,129,0.4)"></div>
+                                <div class="cp-bar" style="height:85%;background:rgba(16,185,129,0.4)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Logística · Milk Run · Analytics</div>
+                    <h3>Sistema de Gestão de Rotas</h3>
+                    <p class="card-desc">Rotas fragmentadas em planilhas por motorista, sem rentabilidade visível. Desenvolvemos plataforma com criação de rotas, Milk Run, gestão de motoristas e sellers, cálculo automático de frete e analytics histórico.</p>
+                    <div class="card-impact-row">
+                        <div class="card-impact-item">Operação centralizada</div>
+                        <div class="card-impact-item">Rentabilidade por rota</div>
+                        <div class="card-impact-item">Histórico operacional</div>
+                    </div>
+                    <div class="card-stack-row">
+                        <span class="tech-pill">React</span>
+                        <span class="tech-pill">Tailwind</span>
+                        <span class="tech-pill">Supabase</span>
+                        <span class="tech-pill">Chart.js</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://sistema-rotas-v2.vercel.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
+                        <a href="https://github.com/SalvianoLopes/-sistema-rotas-logistica-" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Dashboard Bancário -->
+            <div class="project-card reveal reveal-delay-2">
+                <div class="card-preview">
+                    <div class="card-preview-bar" style="background: linear-gradient(90deg, #0EA5E9, #38BDF8)"></div>
+                    <div class="card-preview-topbar">
+                        <div class="d"></div><div class="d"></div><div class="d"></div>
+                    </div>
+                    <div class="card-preview-content">
+                        <div class="cp-row">
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(14,165,233,0.25)"></div><div class="cp-line" style="background:rgba(14,165,233,0.3)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(16,185,129,0.25)"></div><div class="cp-line" style="background:rgba(16,185,129,0.3)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(245,158,11,0.25)"></div><div class="cp-line" style="background:rgba(245,158,11,0.3)"></div></div>
+                        </div>
+                        <div class="cp-chart">
+                            <svg width="100%" height="68" viewBox="0 0 300 68" preserveAspectRatio="none">
+                                <path d="M0,55 C40,50 80,30 120,35 C160,40 200,18 240,22 C270,26 290,20 300,18 L300,68 L0,68Z" fill="rgba(14,165,233,0.1)"/>
+                                <path d="M0,55 C40,50 80,30 120,35 C160,40 200,18 240,22 C270,26 290,20 300,18" fill="none" stroke="#0EA5E9" stroke-width="2"/>
+                                <path d="M0,60 C40,58 80,55 120,52 C160,49 200,47 240,44 C270,42 290,40 300,39" fill="none" stroke="#10B981" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">KPIs · Metas · Histórico</div>
+                    <h3>Dashboard de KPIs Operacionais</h3>
+                    <p class="card-desc">Gestão por planilhas mensais tornava impossível acompanhar 20 indicadores críticos em tempo real. Substituímos por plataforma com metas configuráveis, alertas, drilldown por KPI e 13 meses de histórico.</p>
+                    <div class="card-impact-row">
+                        <div class="card-impact-item">20 KPIs monitorados</div>
+                        <div class="card-impact-item">13 meses de histórico</div>
+                        <div class="card-impact-item">Export PDF e Excel</div>
+                    </div>
+                    <div class="card-stack-row">
+                        <span class="tech-pill">React</span>
+                        <span class="tech-pill">Chart.js</span>
+                        <span class="tech-pill">Supabase</span>
+                        <span class="tech-pill">SheetJS</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://dashboard-bancario.vercel.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
+                        <a href="https://github.com/SalvianoLopes/dashboard-bancario" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Sistema Transportadora -->
+            <div class="project-card reveal reveal-delay-3">
+                <div class="card-preview">
+                    <div class="card-preview-bar" style="background: linear-gradient(90deg, #F59E0B, #FCD34D)"></div>
+                    <div class="card-preview-topbar">
+                        <div class="d"></div><div class="d"></div><div class="d"></div>
+                    </div>
+                    <div class="card-preview-content">
+                        <div class="cp-row">
+                            <div class="cp-box" style="flex:2"><div class="cp-icon" style="background:rgba(245,158,11,0.25)"></div><div class="cp-line" style="background:rgba(245,158,11,0.3)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(16,185,129,0.2)"></div><div class="cp-line" style="background:rgba(16,185,129,0.2)"></div></div>
+                        </div>
+                        <div class="cp-chart">
+                            <div class="cp-bars">
+                                <div class="cp-bar" style="height:70%;background:rgba(245,158,11,0.5)"></div>
+                                <div class="cp-bar" style="height:85%;background:rgba(245,158,11,0.5)"></div>
+                                <div class="cp-bar" style="height:55%;background:rgba(245,158,11,0.5)"></div>
+                                <div class="cp-bar" style="height:90%;background:rgba(245,158,11,0.7)"></div>
+                                <div class="cp-bar" style="height:65%;background:rgba(245,158,11,0.5)"></div>
+                                <div class="cp-bar" style="height:75%;background:rgba(245,158,11,0.5)"></div>
+                                <div class="cp-bar" style="height:80%;background:rgba(245,158,11,0.5)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Frota · Entregas · Financeiro</div>
+                    <h3>Sistema Operacional de Transportadora</h3>
+                    <p class="card-desc">Controle de entregas, frota e despesas distribuído em múltiplas planilhas sem rastreabilidade. Desenvolvemos sistema operacional completo com painel diário, gestão de frota e relatórios automáticos em PDF.</p>
+                    <div class="card-impact-row">
+                        <div class="card-impact-item">Operação centralizada</div>
+                        <div class="card-impact-item">Relatórios em 1 clique</div>
+                        <div class="card-impact-item">Interface dark mode</div>
+                    </div>
+                    <div class="card-stack-row">
+                        <span class="tech-pill">React</span>
+                        <span class="tech-pill">jsPDF</span>
+                        <span class="tech-pill">SheetJS</span>
+                        <span class="tech-pill">Tailwind</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://sistema-gestao-transportadora.vercel.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
+                        <a href="https://github.com/SalvianoLopes/-sistema-gestao-transportadora" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Monitor de Canais -->
+            <div class="project-card reveal reveal-delay-4">
+                <div class="card-preview">
+                    <div class="card-preview-bar" style="background: linear-gradient(90deg, #8B5CF6, #A78BFA)"></div>
+                    <div class="card-preview-topbar">
+                        <div class="d"></div><div class="d"></div><div class="d"></div>
+                    </div>
+                    <div class="card-preview-content">
+                        <div class="cp-row">
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(139,92,246,0.25)"></div><div class="cp-line" style="background:rgba(139,92,246,0.3)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(139,92,246,0.15)"></div><div class="cp-line" style="background:rgba(139,92,246,0.2)"></div></div>
+                            <div class="cp-box"><div class="cp-icon" style="background:rgba(16,185,129,0.2)"></div><div class="cp-line" style="background:rgba(16,185,129,0.2)"></div></div>
+                        </div>
+                        <div class="cp-chart">
+                            <div class="cp-bars">
+                                <div class="cp-bar" style="height:90%;background:rgba(139,92,246,0.6)"></div>
+                                <div class="cp-bar" style="height:55%;background:rgba(139,92,246,0.4)"></div>
+                                <div class="cp-bar" style="height:70%;background:rgba(139,92,246,0.4)"></div>
+                                <div class="cp-bar" style="height:40%;background:rgba(139,92,246,0.4)"></div>
+                                <div class="cp-bar" style="height:60%;background:rgba(139,92,246,0.4)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Análise · Filtros · Relatórios</div>
+                    <h3>Monitor de Canais Críticos</h3>
+                    <p class="card-desc">Análise de demandas por canal exigia tratamento manual de planilhas exportadas dos sistemas legados. Criamos ferramenta 100% client-side: upload XLSX, análise automática, filtros dinâmicos e export consolidado.</p>
+                    <div class="card-impact-row">
+                        <div class="card-impact-item">Análise instantânea</div>
+                        <div class="card-impact-item">Zero backend</div>
+                        <div class="card-impact-item">100% client-side</div>
+                    </div>
+                    <div class="card-stack-row">
+                        <span class="tech-pill">JavaScript</span>
+                        <span class="tech-pill">Chart.js</span>
+                        <span class="tech-pill">SheetJS</span>
+                        <span class="tech-pill">HTML/CSS</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://moonlit-mermaid-cc802d.netlify.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
+                        <a href="https://github.com/SalvianoLopes/-monitor-canais-bancarios" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── STACK ──────────────────── -->
+<section class="stack-section" id="stack">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">Tecnologia</div>
+            <h2 class="section-title">Stack completo, do dado ao deploy.</h2>
+            <p class="section-subtitle">Ferramentas escolhidas pela eficiência real em produção, não pela tendência.</p>
+        </div>
+        <div class="stack-categories">
+            <div class="stack-category reveal reveal-delay-1">
+                <div class="stack-cat-header">
+                    <div class="stack-cat-icon" style="background:rgba(14,165,233,0.1)">⚛️</div>
+                    <h3>Frontend</h3>
+                </div>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="stack-item-icon">⚛️</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">React</div>
+                            <div class="stack-item-desc">Interfaces orientadas a componentes</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🟨</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">JavaScript</div>
+                            <div class="stack-item-desc">Lógica de produto e integrações</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🌊</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Tailwind CSS</div>
+                            <div class="stack-item-desc">Design system e velocidade de UI</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🌐</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">HTML / CSS</div>
+                            <div class="stack-item-desc">Estrutura e estilo de alta performance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-category reveal reveal-delay-2">
+                <div class="stack-cat-header">
+                    <div class="stack-cat-icon" style="background:rgba(16,185,129,0.1)">🔷</div>
+                    <h3>Backend & Dados</h3>
+                </div>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🟦</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Node.js</div>
+                            <div class="stack-item-desc">APIs e processamento server-side</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🐍</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Python</div>
+                            <div class="stack-item-desc">Automação e manipulação de dados</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🔷</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Supabase</div>
+                            <div class="stack-item-desc">Banco, autenticação e API em tempo real</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🐘</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">PostgreSQL</div>
+                            <div class="stack-item-desc">Modelagem e consultas relacionais</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-category reveal reveal-delay-3">
+                <div class="stack-cat-header">
+                    <div class="stack-cat-icon" style="background:rgba(245,158,11,0.1)">📊</div>
+                    <h3>Analytics & Visualização</h3>
+                </div>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="stack-item-icon">📊</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Chart.js</div>
+                            <div class="stack-item-desc">Visualização de KPIs e dashboards</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">📑</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">SheetJS</div>
+                            <div class="stack-item-desc">Importação e exportação de Excel</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">📄</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">jsPDF</div>
+                            <div class="stack-item-desc">Geração de relatórios em PDF</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🔢</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">SQL avançado</div>
+                            <div class="stack-item-desc">Queries, views e otimização</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-category reveal reveal-delay-4">
+                <div class="stack-cat-header">
+                    <div class="stack-cat-icon" style="background:rgba(139,92,246,0.1)">▲</div>
+                    <h3>Deploy & Infra</h3>
+                </div>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="stack-item-icon">▲</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Vercel</div>
+                            <div class="stack-item-desc">Deploy, edge network e CI/CD</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🌿</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Netlify</div>
+                            <div class="stack-item-desc">Hospedagem e deploy contínuo</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">🎯</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Git / GitHub</div>
+                            <div class="stack-item-desc">Controle de versão e colaboração</div>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="stack-item-icon">☁️</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Supabase Cloud</div>
+                            <div class="stack-item-desc">Banco gerenciado em produção</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── ABOUT ──────────────────── -->
+<section class="about-section" id="sobre">
+    <div class="container">
+        <div class="about-inner">
+            <div class="about-text reveal">
+                <div class="about-label">Perfil híbrido</div>
+                <h2>Não sou apenas<br><em>desenvolvedor</em>.</h2>
+                <p class="about-quote">
+                    Construí operações logísticas durante <strong>20 anos</strong> antes de construir software. Sei o que acontece no chão de operação: os relatórios que chegam tarde, os controles que falham, as decisões tomadas sem dado.
+                </p>
+                <p class="about-quote">
+                    Por isso, os sistemas que entrego têm <strong>lógica operacional embutida</strong>, não apenas código limpo. Cada tela foi pensada por quem já precisou usar uma.
+                </p>
+            </div>
+            <div class="about-side reveal reveal-delay-2">
+                <div class="about-stat-card">
+                    <div class="about-stat-num">20+</div>
+                    <div class="about-stat-desc">Anos gerenciando operações logísticas, transporte e distribuição</div>
+                </div>
+                <div class="about-stat-card">
+                    <div class="about-stat-num">4</div>
+                    <div class="about-stat-desc">Sistemas em produção, com usuários reais e dados reais</div>
+                </div>
+                <div class="about-stat-card">
+                    <div class="about-stat-num">1</div>
+                    <div class="about-stat-desc">Perfil que une visão de operação, gestão e engenharia de software</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── CONTACT ──────────────────── -->
+<section class="contact-section" id="contato">
+    <div class="container">
+        <div class="contact-inner">
+            <div class="contact-eyebrow reveal">Contato</div>
+            <h2 class="reveal reveal-delay-1">
+                Se sua operação ainda depende<br>de planilhas —
+            </h2>
+            <p class="contact-sub reveal reveal-delay-2">Eu posso transformar isso em <span style="color:var(--primary)">software</span>.</p>
+            <p class="contact-body reveal reveal-delay-3">Traga o problema operacional. Eu trago a solução técnica. Juntos construímos uma plataforma que sua equipe vai realmente usar.</p>
+            <div class="contact-ctas reveal reveal-delay-3">
+                <a href="mailto:lopes.salviano@gmail.com" class="btn btn-contact-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Enviar email
+                </a>
+                <a href="https://linkedin.com/in/salvianolopespereira" target="_blank" class="btn btn-contact-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/SalvianoLopes" target="_blank" class="btn btn-contact-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <div class="contact-availability reveal reveal-delay-4">
+                <div class="avail-item"><div class="avail-dot"></div>Aberto a projetos</div>
+                <div class="avail-item"><div class="avail-dot"></div>Consultoria técnica</div>
+                <div class="avail-item"><div class="avail-dot"></div>Full-time ou PJ</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──────────────────── FOOTER ──────────────────── -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <a href="#" class="footer-brand">
+                <div class="nav-logo" style="width:28px;height:28px;font-size:11px">SL</div>
+                <span class="footer-name">Salviano Lopes</span>
+            </a>
+            <div class="footer-links">
+                <a href="#projetos">Projetos</a>
+                <a href="#stack">Stack</a>
+                <a href="#contato">Contato</a>
+                <a href="https://github.com/SalvianoLopes" target="_blank">GitHub</a>
+            </div>
+            <span class="footer-copy">© 2026 Salviano Lopes</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ── NAVBAR SCROLL ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── MOBILE MENU ──
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileMenuClose');
+
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // ── SCROLL REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // ── KPI COUNTER ANIMATION ──
+    function animateCounter(el) {
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimal || '0');
+        const duration = 1600;
+        const start = performance.now();
+
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * target;
+            el.textContent = current.toFixed(decimals) + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+            else el.textContent = target.toFixed(decimals) + suffix;
+        }
+        requestAnimationFrame(update);
+    }
+
+    const kpiObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
+                kpiObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    const heroKpis = document.querySelector('.hero-kpis');
+    if (heroKpis) kpiObserver.observe(heroKpis);
+</script>
+</body>
+</html>
