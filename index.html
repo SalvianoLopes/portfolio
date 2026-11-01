@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salviano Lopes — Logística + Engenharia de Software</title>
-    <meta name="description" content="Full-Stack Engineer com 20+ anos em logística e operações. Especializado em transformar processos em plataformas digitais escaláveis.">
+    <title>Salviano Lopes — Full Stack Developer & Especialista em Logística</title>
+    <meta name="description" content="Desenvolvedor Full Stack com 20+ anos de experiência prática em logística e operações. Criador de plataformas escaláveis para fretes, rotas e inteligência operacional.">
+    <meta name="author" content="Salviano Lopes Pereira">
+    <link rel="canonical" href="https://salvianolopes.vercel.app">
+    <meta name="theme-color" content="#0F172A">
+
+    <!-- Open Graph / LinkedIn / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://salvianolopes.vercel.app">
+    <meta property="og:title" content="Salviano Lopes — Full Stack Developer & Especialista em Logística">
+    <meta property="og:description" content="Desenvolvedor Full Stack com 20+ anos em logística e operações. Especializado em transformar processos complexos em plataformas digitais escaláveis.">
+    <meta property="og:image" content="https://salvianolopes.vercel.app/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Portfólio de Salviano Lopes Pereira — Full Stack Developer & Especialista em Logística">
+    <meta property="og:site_name" content="Portfólio Salviano Lopes">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://salvianolopes.vercel.app">
+    <meta name="twitter:title" content="Salviano Lopes — Full Stack Developer & Especialista em Logística">
+    <meta name="twitter:description" content="Engenharia de software com 20+ anos em logística e operações. Conheça o case FreteHub (Ydècory) e outras aplicações desenvolvidas.">
+    <meta name="twitter:image" content="https://salvianolopes.vercel.app/og-cover.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet">
@@ -27,17 +50,71 @@
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
             background: var(--light);
+            overflow-x: hidden;
+            width: 100%;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
 
         .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── ACCESSIBILITY & FOCUS ── */
+        .skip-link {
+            position: absolute;
+            top: -70px;
+            left: 16px;
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 9999;
+            text-decoration: none;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 16px;
+        }
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+        }
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+        }
+        .hero-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34D399;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(0.85); }
+        }
 
         /* ── REVEAL ANIMATIONS ── */
         .reveal {
@@ -589,6 +666,41 @@
         }
         .impact-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; flex-shrink: 0; }
         .featured-ctas { display: flex; gap: 12px; margin-top: 28px; }
+        .case-demo-notice {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            color: #0369A1;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 9px 14px;
+            border-radius: 8px;
+            margin-top: 14px;
+            line-height: 1.4;
+        }
+        .case-demo-notice svg { flex-shrink: 0; color: var(--secondary); }
+        .quote-badge-cheap {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
+        .quote-badge-fast {
+            display: inline-block;
+            background: rgba(14, 165, 233, 0.15);
+            color: #38BDF8;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-left: 6px;
+        }
 
         /* ── PROJECTS ── */
         .projects {
@@ -912,16 +1024,54 @@
             .value-grid { grid-template-columns: 1fr; }
             .projects-grid { grid-template-columns: 1fr; }
             .stack-categories { grid-template-columns: 1fr; }
-            .hero-kpis { grid-template-columns: repeat(2, 1fr); }
+            .hero-kpis { grid-template-columns: repeat(2, 1fr); width: 100%; max-width: 100%; }
             .footer-inner { flex-direction: column; text-align: center; }
             .footer-links { justify-content: center; }
-            .contact-ctas { flex-direction: column; align-items: center; }
-            .hero-ctas { flex-direction: column; align-items: flex-start; }
+            .contact-ctas { flex-direction: column; align-items: stretch; }
+            .hero-ctas { flex-direction: column; align-items: stretch; }
             .featured-ctas { flex-direction: column; }
         }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero-badges { flex-direction: column; align-items: stretch; gap: 8px; }
+            .hero-badge { width: 100%; }
+            .photo-wrapper { width: 220px; height: 220px; }
+            .hero-kpis { grid-template-columns: 1fr; }
+            .btn { width: 100%; justify-content: center; }
+            .card-links { flex-direction: column; }
+            .card-links .card-link { width: 100%; }
+            .preview-stat-row { grid-template-columns: 1fr; gap: 8px; }
+        }
+
+        /* Focused refinements preserving the original visual identity. */
+        .featured-inner { align-items: start; }
+        @media (min-width: 1025px) { .featured-preview-wrap { position: sticky; top: 112px; } }
+
+        section[id], main[id] { scroll-margin-top: 96px; }
+        .hero-inner > *, .featured-inner > * { min-width: 0; }
+        .production-status { display: inline-block; color: #047857; background: #D1FAE5; border-radius: 8px; padding: 7px 12px; margin: 12px 0 18px; font-weight: 700; font-size: 13px; }
+        .career-result { background: #ECFDF5; padding: 40px 0; border-bottom: 1px solid #A7F3D0; }
+        .career-result-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 36px; }
+        .career-result h2 { font-size: 24px; line-height: 1.3; letter-spacing: -.5px; }
+        .career-result p { font-size: 14px; line-height: 1.75; }
+        .career-result-note { margin-top: 12px; color: #475569; font-size: 12px !important; }
+        .kpi-label { color: rgba(255,255,255,.72); }
+        .hero-desc { color: rgba(255,255,255,.72); }
+        .preview-tab { overflow-wrap: anywhere; }
+        .preview-row { gap: 6px; }
+        .pr-label { min-width: 0; overflow-wrap: anywhere; }
+        .pr-val { white-space: nowrap; }
+        .quote-badge-cheap, .quote-badge-fast { display: inline-block; white-space: normal; }
+        .nav-mobile-menu { z-index: 1001; }
+        @media (max-width: 768px) { .career-result-inner { grid-template-columns: 1fr; gap: 16px; } }
+        @media (max-width: 480px) { .pr-bar-wrap { display: none; } .preview-body { padding: 12px; } .hero-eyebrow { max-width: 100%; white-space: normal; } }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
     </style>
+    <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
+
+<a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
 
 <!-- ──────────────────── NAVBAR ──────────────────── -->
 <header class="navbar" id="navbar">
@@ -932,12 +1082,13 @@
                 <span class="nav-name">Salviano Lopes</span>
             </a>
             <nav class="nav-links">
-                <a href="#projetos">Projetos</a>
+                <a href="#case-principal">Case FreteHub</a>
+                <a href="#projetos">Outros Projetos</a>
                 <a href="#stack">Stack</a>
                 <a href="#sobre">Sobre</a>
                 <a href="#contato" class="nav-cta">Vamos conversar</a>
             </nav>
-            <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Menu">
+            <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                     <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
                 </svg>
@@ -947,45 +1098,51 @@
 </header>
 
 <!-- Mobile Menu -->
-<nav class="nav-mobile-menu" id="mobileMenu">
-    <button class="nav-mobile-close" id="mobileMenuClose">✕</button>
-    <a href="#projetos" class="mobile-link">Projetos</a>
+<nav class="nav-mobile-menu" id="mobileMenu" aria-label="Navegação móvel">
+    <button class="nav-mobile-close" id="mobileMenuClose" aria-label="Fechar menu">&times;</button>
+    <a href="#case-principal" class="mobile-link">Case FreteHub</a>
+    <a href="#projetos" class="mobile-link">Outros Projetos</a>
     <a href="#stack" class="mobile-link">Stack</a>
     <a href="#sobre" class="mobile-link">Sobre</a>
     <a href="#contato" class="mobile-link" style="color: var(--primary);">Vamos conversar</a>
 </nav>
 
+<main id="conteudo">
 <!-- ──────────────────── HERO ──────────────────── -->
 <section class="hero">
     <div class="hero-grid"></div>
     <div class="container">
         <div class="hero-inner">
             <div class="hero-left">
+                <div class="hero-status-pill">
+                    <span class="status-pulse"></span>
+                    <span>Disponível para Oportunidades Full Stack (CLT ou PJ)</span>
+                </div>
                 <div class="hero-eyebrow">
                     <span></span>
-                    Logística · Engenharia de Software · Dados
+                    Desenvolvimento Full Stack · Engenharia de Software · Logística
                 </div>
                 <h1>Salviano<br>Lopes</h1>
-                <p class="hero-subtitle">Transformo processos logísticos e operacionais em plataformas escaláveis</p>
-                <p class="hero-desc">20 anos construindo operações. Hoje, construo também o software que as move. Sistemas em produção, dados em tempo real, decisões mais rápidas.</p>
+                <p class="hero-subtitle">Desenvolvedor Full Stack unindo código moderno e 20+ anos de inteligência operacional</p>
+                <p class="hero-desc">Buscando ativamente posições como Desenvolvedor Full Stack (CLT ou PJ, Remoto ou Híbrido). Arquiteto soluções de ponta a ponta com Next.js, React, Node.js e bancos relacionais, com o diferencial competitivo de entender a fundo os fluxos, regras e custos reais do negócio.</p>
                 <div class="hero-badges">
+                    <span class="hero-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+                        Full Stack Developer
+                    </span>
                     <span class="hero-badge">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
                         20+ anos em Logística
                     </span>
                     <span class="hero-badge">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
-                        Full-Stack Engineer
-                    </span>
-                    <span class="hero-badge">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        4 Sistemas em Produção
+                        Soluções Operacionais
                     </span>
                 </div>
                 <div class="hero-ctas">
-                    <a href="#contato" class="btn btn-primary">Vamos conversar →</a>
-                    <a href="#projetos" class="btn btn-outline">Ver projetos</a>
-                    <a href="https://github.com/SalvianoLopes" target="_blank" class="btn btn-ghost">
+                    <a href="#case-principal" class="btn btn-primary">Ver Case FreteHub →</a>
+                    <a href="#contato" class="btn btn-outline">Oportunidades & Contato</a>
+                    <a href="https://github.com/SalvianoLopes" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                         GitHub
                     </a>
@@ -1001,20 +1158,20 @@
                 </div>
                 <div class="hero-kpis">
                     <div class="hero-kpi">
-                        <div class="kpi-number" data-count="38.89" data-suffix="%" data-decimal="2">0%</div>
-                        <div class="kpi-label">Redução de custos<br>operacionais</div>
+                        <div class="kpi-number" data-count="38.89" data-suffix="%" data-decimal="2">38,89%</div>
+                        <div class="kpi-label">Redução média nos custos<br>com fretes · trajetória profissional</div>
                     </div>
                     <div class="hero-kpi">
-                        <div class="kpi-number" data-count="98" data-suffix="%">0%</div>
-                        <div class="kpi-label">SLA operacional<br>sustentado</div>
+                        <div class="kpi-number" data-count="98" data-suffix="%">98%</div>
+                        <div class="kpi-label">SLA operacional<br>médio sustentado</div>
                     </div>
                     <div class="hero-kpi">
-                        <div class="kpi-number" data-count="91" data-suffix="">0</div>
-                        <div class="kpi-label">NPS score<br>conquistado</div>
+                        <div class="kpi-number" data-count="91" data-suffix="">91</div>
+                        <div class="kpi-label">NPS score<br>em gestão operacional</div>
                     </div>
                     <div class="hero-kpi">
-                        <div class="kpi-number" data-count="4" data-suffix="">0</div>
-                        <div class="kpi-label">Produtos ativos<br>em produção</div>
+                        <div class="kpi-number" data-count="5" data-suffix="+">5+</div>
+                        <div class="kpi-label">Aplicações e<br>sistemas desenvolvidos</div>
                     </div>
                 </div>
             </div>
@@ -1022,6 +1179,15 @@
     </div>
 </section>
 
+<section class="career-result" aria-labelledby="career-result-title">
+    <div class="container">
+        <div class="career-result-inner">
+            <div><span class="section-eyebrow">Resultado da trajetória em logística</span><h2 id="career-result-title">38,89% de redução média nos custos com fretes</h2></div>
+            <div><p>Analiso a volumetria e a distribuição dos embarques para direcionar cada região às transportadoras mais competitivas naquela praça. A concentração de volume gera previsibilidade e potencial de faturamento para o fornecedor, fortalecendo a negociação de tarifas.</p>
+            <p class="career-result-note">Média informada por Salviano nas operações em que aplicou essa estratégia. O resultado se refere à atuação em gestão logística e não é atribuído exclusivamente ao FreteHub.</p></div>
+        </div>
+    </div>
+</section>
 <!-- ──────────────────── VALUE PROPS ──────────────────── -->
 <section class="value-props">
     <div class="container">
@@ -1051,7 +1217,7 @@
 </section>
 
 <!-- ──────────────────── FEATURED CASE ──────────────────── -->
-<section class="featured-case">
+<section class="featured-case" id="case-principal">
     <div class="container">
         <div class="featured-inner">
             <div class="featured-preview-wrap reveal">
@@ -1060,93 +1226,130 @@
                         <div class="preview-dot red"></div>
                         <div class="preview-dot yellow"></div>
                         <div class="preview-dot green"></div>
-                        <div class="preview-tab">Sistema de Rotas · Produção</div>
+                        <div class="preview-tab">Prévia ilustrativa com dados fictícios · FreteHub</div>
                     </div>
                     <div class="preview-body">
                         <div class="preview-stat-row">
                             <div class="preview-stat">
-                                <div class="ps-num" style="color:#10B981">142</div>
-                                <div class="ps-lbl">Rotas ativas</div>
+                                <div class="ps-num" style="color:#10B981">4</div>
+                                <div class="ps-lbl">Transportadoras cotadas</div>
                             </div>
                             <div class="preview-stat">
-                                <div class="ps-num" style="color:#0EA5E9">38</div>
-                                <div class="ps-lbl">Motoristas</div>
+                                <div class="ps-num" style="color:#0EA5E9">210 kg</div>
+                                <div class="ps-lbl">Peso Cubado (Real 185kg)</div>
                             </div>
                             <div class="preview-stat">
-                                <div class="ps-num" style="color:#F59E0B">94%</div>
-                                <div class="ps-lbl">Rentabilidade</div>
+                                <div class="ps-num" style="color:#F59E0B">R$ 142,50</div>
+                                <div class="ps-lbl">Melhor tarifa frete</div>
                             </div>
                         </div>
-                        <div class="preview-chart">
-                            <svg width="100%" height="100%" viewBox="0 0 360 100" preserveAspectRatio="none">
-                                <defs>
-                                    <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#10B981" stop-opacity="0.3"/>
-                                        <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
-                                    </linearGradient>
-                                </defs>
-                                <path d="M0,80 C40,70 80,40 120,45 C160,50 200,25 240,30 C280,35 320,15 360,20 L360,100 L0,100Z" fill="url(#lineGrad)"/>
-                                <path d="M0,80 C40,70 80,40 120,45 C160,50 200,25 240,30 C280,35 320,15 360,20" fill="none" stroke="#10B981" stroke-width="2.5"/>
-                                <path d="M0,85 C40,82 80,75 120,70 C160,65 200,60 240,58 C280,56 320,50 360,52" fill="none" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
-                            </svg>
-                        </div>
+
+                        <!-- Quotation comparison table (4 transportadoras para consistência com o resumo) -->
                         <div class="preview-table">
                             <div class="preview-row">
                                 <div class="pr-dot" style="background:#10B981"></div>
-                                <div class="pr-label">Rota Milk Run Sul</div>
-                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:85%;background:#10B981"></div></div>
-                                <div class="pr-val">R$4.2k</div>
+                                <div class="pr-label">Transportadora Express Log <span class="quote-badge-cheap">Melhor Tarifa</span></div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:90%;background:#10B981"></div></div>
+                                <div class="pr-val" style="color:#10B981;width:55px;">R$ 142,50</div>
                             </div>
                             <div class="preview-row">
                                 <div class="pr-dot" style="background:#0EA5E9"></div>
-                                <div class="pr-label">Rota Expressa Centro</div>
-                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:60%;background:#0EA5E9"></div></div>
-                                <div class="pr-val">R$3.1k</div>
+                                <div class="pr-label">Cargas Sul Distribuição <span class="quote-badge-fast">1 dia útil</span></div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:70%;background:#0EA5E9"></div></div>
+                                <div class="pr-val" style="width:55px;">R$ 168,00</div>
                             </div>
                             <div class="preview-row">
                                 <div class="pr-dot" style="background:#F59E0B"></div>
-                                <div class="pr-label">Rota Industrial Norte</div>
-                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:45%;background:#F59E0B"></div></div>
-                                <div class="pr-val">R$2.3k</div>
+                                <div class="pr-label">TransRodoviário Brasil</div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:50%;background:#F59E0B"></div></div>
+                                <div class="pr-val" style="width:55px;">R$ 185,00</div>
                             </div>
+                            <div class="preview-row">
+                                <div class="pr-dot" style="background:#8B5CF6"></div>
+                                <div class="pr-label">Rápido Sudeste Cargas</div>
+                                <div class="pr-bar-wrap"><div class="pr-bar" style="width:35%;background:#8B5CF6"></div></div>
+                                <div class="pr-val" style="width:55px;">R$ 215,00</div>
+                            </div>
+                        </div>
+
+                        <!-- Tracking / NF status snippet -->
+                        <div style="margin-top:14px;padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;flex-wrap:wrap;">
+                                <span style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.8);">NF-e #49281 · Tracking Ativo</span>
+                                <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(16,185,129,0.15);color:#10B981;font-weight:600;">Em Trânsito · No Prazo</span>
+                            </div>
+                            <div style="font-size:11px;color:rgba(255,255,255,0.45);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+                                <span>Origem: CD Central &rarr; Destino: Curitiba/PR</span>
+                                <span>Cubagem: 1,42 m³</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:12px;text-align:center;font-size:11px;color:rgba(255,255,255,0.45);display:flex;align-items:center;justify-content:center;gap:6px;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            Prévia ilustrativa com dados fictícios · Sem conexão com produção
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="featured-content reveal reveal-delay-2">
-                <div class="featured-label">Case em destaque</div>
-                <h2>Sistema de Gestão de Rotas Logísticas</h2>
+                <div class="featured-label">Case Principal · Full Stack & Logística</div>
+                <h2>FreteHub (Ydècory)</h2>
+                <p class="production-status">Em produção · Aproximadamente 20 usuários</p>
+                <p style="font-size: 16px; color: var(--muted); margin-bottom: 20px; font-weight: 500;">
+                    Centralização de cotação de fretes entre transportadoras, acompanhamento de notas fiscais e controle financeiro operacional.
+                </p>
+
                 <div class="case-block">
-                    <div class="case-block-label">Problema</div>
-                    <p>Operações de rota gerenciadas em planilhas separadas por motorista. Sem visibilidade de rentabilidade, sem histórico unificado, sem controle de sellers — e horas de reconciliação manual por semana.</p>
+                    <div class="case-block-label">Desafio Operacional</div>
+                    <p>Operações de frete demandavam cotações manuais fragmentadas por e-mail e planilhas, gerando lentidão no cálculo de peso cubado, ausência de padronização nas tabelas de frete e falta de visibilidade em tempo real sobre entregas e custos logísticos.</p>
+                </div>
+
+                <div class="case-block">
+                    <div class="case-block-label">Solução de Engenharia</div>
+                    <p>Plataforma web centralizada integrando cálculo automatizado de cubagem e peso tarifado, comparativo instantâneo entre transportadoras, gestão de status por nota fiscal, dashboards financeiros consolidados e controle de acesso por perfil.</p>
+                </div>
+
+                <div class="case-block">
+                    <div class="case-block-label">Minha participação</div>
+                    <p>Idealização e desenvolvimento Full Stack individual, com apoio de ferramentas de IA: definição do problema, regras de negócio, implementação, banco de dados, integrações, implantação e evolução da solução.</p>
                 </div>
                 <div class="case-block">
-                    <div class="case-block-label">Solução</div>
-                    <p>Plataforma completa com criação de rotas, suporte a Milk Run, cálculo automático de rentabilidade, gestão de motoristas e sellers, analytics com histórico operacional e autenticação por usuário.</p>
+                    <div class="case-block-label">Ganhos na operação</div>
+                    <p>Cotações mais ágeis, menor dependência de planilhas, acompanhamento centralizado das entregas e melhoria na conferência financeira. Resultados qualitativos relatados na operação.</p>
                 </div>
                 <div class="case-block">
-                    <div class="case-block-label">Stack</div>
+                    <div class="case-block-label">Tecnologias do projeto</div>
                     <div class="case-stack-badges">
+                        <span class="stack-badge">Next.js</span>
                         <span class="stack-badge">React</span>
-                        <span class="stack-badge">Tailwind CSS</span>
+                        <span class="stack-badge">TypeScript</span>
                         <span class="stack-badge">Supabase</span>
-                        <span class="stack-badge">Chart.js</span>
                         <span class="stack-badge">PostgreSQL</span>
+                        <span class="stack-badge">Tailwind CSS</span>
+                        <span class="stack-badge">Vercel</span>
                     </div>
                 </div>
+
                 <div class="case-block">
-                    <div class="case-block-label">Impacto</div>
+                    <div class="case-block-label">Funcionalidades do Sistema</div>
                     <div class="case-impact">
-                        <div class="impact-item"><div class="impact-dot"></div>Operação de rota 100% centralizada em uma plataforma</div>
-                        <div class="impact-item"><div class="impact-dot"></div>Cálculo de rentabilidade automatizado por rota</div>
-                        <div class="impact-item"><div class="impact-dot"></div>Visibilidade de frete e volume em tempo real</div>
-                        <div class="impact-item"><div class="impact-dot"></div>Eliminação das planilhas descentralizadas</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Comparação de cotações entre transportadoras e regras de frete</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Cálculo logístico automático de peso cubado vs. peso real</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Acompanhamento de entregas e notas fiscais com filtros operacionais</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Painel financeiro para conciliação e histórico de custos</div>
+                        <div class="impact-item"><div class="impact-dot"></div>Acesso por perfil de usuário</div>
                     </div>
                 </div>
+
+                <div class="case-demo-notice">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <span>O FreteHub está em produção. A interface ao lado é uma ilustração estática com dados fictícios; não executa cotações nem acessa a operação real. Detalhes de implementação serão confirmados após análise do repositório.</span>
+                </div>
+
                 <div class="featured-ctas">
-                    <a href="https://sistema-rotas-v2.vercel.app" target="_blank" class="btn btn-primary">Ver demo ao vivo →</a>
-                    <a href="https://github.com/SalvianoLopes/-sistema-rotas-logistica-" target="_blank" class="btn btn-outline-dark">Ver código</a>
+                    <a href="#contato" class="btn btn-primary">Falar sobre esta solução →</a>
+                    <a href="https://github.com/SalvianoLopes" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark">Ver GitHub</a>
                 </div>
             </div>
         </div>
@@ -1157,9 +1360,9 @@
 <section class="projects" id="projetos">
     <div class="container">
         <div class="section-header reveal">
-            <div class="section-eyebrow">Projetos</div>
-            <h2 class="section-title">4 sistemas. 4 problemas resolvidos.</h2>
-            <p class="section-subtitle">Cada projeto nasceu de uma operação real. Cada um está em produção.</p>
+            <div class="section-eyebrow">Outras Soluções</div>
+            <h2 class="section-title">4 soluções implantadas em empresas</h2>
+            <p class="section-subtitle">Projetos desenvolvidos e comercializados, em uso nas empresas onde foram implantados. Os links abaixo abrem as aplicações publicadas e podem exigir autenticação.</p>
         </div>
         <div class="projects-grid">
 
@@ -1208,8 +1411,8 @@
                         <span class="tech-pill">Chart.js</span>
                     </div>
                     <div class="card-links">
-                        <a href="https://sistema-rotas-v2.vercel.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
-                        <a href="https://github.com/SalvianoLopes/-sistema-rotas-logistica-" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                        <a href="https://sistema-rotas-v2.vercel.app" target="_blank" rel="noopener noreferrer" class="card-link card-link-primary">Abrir aplicação →</a>
+                        <a href="https://github.com/SalvianoLopes/-sistema-rotas-logistica-" target="_blank" rel="noopener noreferrer" class="card-link card-link-secondary">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -1252,8 +1455,8 @@
                         <span class="tech-pill">SheetJS</span>
                     </div>
                     <div class="card-links">
-                        <a href="https://dashboard-bancario.vercel.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
-                        <a href="https://github.com/SalvianoLopes/dashboard-bancario" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                        <a href="https://dashboard-bancario.vercel.app" target="_blank" rel="noopener noreferrer" class="card-link card-link-primary">Abrir aplicação →</a>
+                        <a href="https://github.com/SalvianoLopes/dashboard-bancario" target="_blank" rel="noopener noreferrer" class="card-link card-link-secondary">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -1299,8 +1502,8 @@
                         <span class="tech-pill">Tailwind</span>
                     </div>
                     <div class="card-links">
-                        <a href="https://sistema-gestao-transportadora.vercel.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
-                        <a href="https://github.com/SalvianoLopes/sistema-gestao-transportadora" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                        <a href="https://sistema-gestao-transportadora.vercel.app" target="_blank" rel="noopener noreferrer" class="card-link card-link-primary">Abrir aplicação →</a>
+                        <a href="https://github.com/SalvianoLopes/sistema-gestao-transportadora" target="_blank" rel="noopener noreferrer" class="card-link card-link-secondary">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -1345,8 +1548,8 @@
                         <span class="tech-pill">HTML/CSS</span>
                     </div>
                     <div class="card-links">
-                        <a href="https://canais-criticos-inbursa.netlify.app" target="_blank" class="card-link card-link-primary">Demo ao vivo →</a>
-                        <a href="https://github.com/SalvianoLopes/monitor-canais-bancarios" target="_blank" class="card-link card-link-secondary">GitHub</a>
+                        <a href="https://canais-criticos-inbursa.netlify.app" target="_blank" rel="noopener noreferrer" class="card-link card-link-primary">Abrir aplicação →</a>
+                        <a href="https://github.com/SalvianoLopes/monitor-canais-bancarios" target="_blank" rel="noopener noreferrer" class="card-link card-link-secondary">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -1370,6 +1573,13 @@
                     <h3>Frontend</h3>
                 </div>
                 <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="stack-item-icon">▲</div>
+                        <div class="stack-item-info">
+                            <div class="stack-item-name">Next.js</div>
+                            <div class="stack-item-desc">Aplicações Full Stack e SSR</div>
+                        </div>
+                    </div>
                     <div class="stack-item">
                         <div class="stack-item-icon">⚛️</div>
                         <div class="stack-item-info">
@@ -1520,14 +1730,15 @@
     <div class="container">
         <div class="about-inner">
             <div class="about-text reveal">
-                <div class="about-label">Perfil híbrido</div>
-                <h2>Não sou apenas<br><em>desenvolvedor</em>.</h2>
+                <div class="about-label">Desenvolvimento, operação e dados</div>
+                <h2>Experiência operacional.<br><em>Soluções em software.</em></h2>
                 <p class="about-quote">
                     Construí operações logísticas durante <strong>20 anos</strong> antes de construir software. Sei o que acontece no chão de operação: os relatórios que chegam tarde, os controles que falham, as decisões tomadas sem dado.
                 </p>
                 <p class="about-quote">
                     Por isso, os sistemas que entrego têm <strong>lógica operacional embutida</strong>, não apenas código limpo. Cada tela foi pensada por quem já precisou usar uma.
                 </p>
+            <p class="about-quote">Formação complementar pela Asimov em Engenharia de IA e Análise de Dados. Disponível para oportunidades Full Stack, Frontend, Backend, Python, IA e Dados.</p>
             </div>
             <div class="about-side reveal reveal-delay-2">
                 <div class="about-stat-card">
@@ -1535,8 +1746,8 @@
                     <div class="about-stat-desc">Anos gerenciando operações logísticas, transporte e distribuição</div>
                 </div>
                 <div class="about-stat-card">
-                    <div class="about-stat-num">4</div>
-                    <div class="about-stat-desc">Sistemas em produção, com usuários reais e dados reais</div>
+                    <div class="about-stat-num">5</div>
+                    <div class="about-stat-desc">Aplicações e ferramentas desenvolvidas para resolver desafios operacionais</div>
                 </div>
                 <div class="about-stat-card">
                     <div class="about-stat-num">1</div>
@@ -1551,35 +1762,36 @@
 <section class="contact-section" id="contato">
     <div class="container">
         <div class="contact-inner">
-            <div class="contact-eyebrow reveal">Contato</div>
+            <div class="contact-eyebrow reveal">Oportunidades & Contato</div>
             <h2 class="reveal reveal-delay-1">
-                Se sua operação ainda depende<br>de planilhas —
+                Buscando novas oportunidades como<br><span style="color:var(--primary)">Desenvolvedor Full Stack</span>
             </h2>
-            <p class="contact-sub reveal reveal-delay-2">Eu posso transformar isso em <span style="color:var(--primary)">software</span>.</p>
-            <p class="contact-body reveal reveal-delay-3">Traga o problema operacional. Eu trago a solução técnica. Juntos construímos uma plataforma que sua equipe vai realmente usar.</p>
+            <p class="contact-sub reveal reveal-delay-2">Engenharia de software com o diferencial estratégico de 20+ anos no chão de operações e logística.</p>
+            <p class="contact-body reveal reveal-delay-3">Estou ativamente disponível para contratação como Desenvolvedor Full Stack (CLT ou PJ, modelo remoto ou híbrido). Trago a capacidade de entregar software de ponta a ponta com o diferencial raro de entender profundamente a operação e o negócio.</p>
             <div class="contact-ctas reveal reveal-delay-3">
                 <a href="mailto:lopes.salviano@gmail.com" class="btn btn-contact-primary">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    Enviar email
+                    Conversar por e-mail
                 </a>
-                <a href="https://linkedin.com/in/salvianolopespereira" target="_blank" class="btn btn-contact-outline">
+                <a href="https://linkedin.com/in/salvianolopespereira" target="_blank" rel="noopener noreferrer" class="btn btn-contact-outline">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                    LinkedIn
+                    Conectar no LinkedIn
                 </a>
-                <a href="https://github.com/SalvianoLopes" target="_blank" class="btn btn-contact-outline">
+                <a href="https://github.com/SalvianoLopes" target="_blank" rel="noopener noreferrer" class="btn btn-contact-outline">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                     GitHub
                 </a>
             </div>
             <div class="contact-availability reveal reveal-delay-4">
-                <div class="avail-item"><div class="avail-dot"></div>Aberto a projetos</div>
-                <div class="avail-item"><div class="avail-dot"></div>Consultoria técnica</div>
-                <div class="avail-item"><div class="avail-dot"></div>Full-time ou PJ</div>
+                <div class="avail-item"><div class="avail-dot"></div>Disponível para Full Stack (CLT ou PJ)</div>
+                <div class="avail-item"><div class="avail-dot"></div>Atuação Remota ou Híbrida</div>
+                <div class="avail-item"><div class="avail-dot"></div>Disponibilidade Imediata</div>
             </div>
         </div>
     </div>
 </section>
 
+</main>
 <!-- ──────────────────── FOOTER ──────────────────── -->
 <footer>
     <div class="container">
@@ -1592,7 +1804,7 @@
                 <a href="#projetos">Projetos</a>
                 <a href="#stack">Stack</a>
                 <a href="#contato">Contato</a>
-                <a href="https://github.com/SalvianoLopes" target="_blank">GitHub</a>
+                <a href="https://github.com/SalvianoLopes" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
             <span class="footer-copy">© 2026 Salviano Lopes</span>
         </div>
@@ -1611,11 +1823,31 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileClose = document.getElementById('mobileMenuClose');
 
-    mobileBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
-    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    function closeMenu(restoreFocus = true) {
+        mobileMenu.classList.remove('open');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        if (restoreFocus) mobileBtn.focus();
+    }
+    mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+        mobileBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        mobileClose.focus();
     });
+    mobileClose.addEventListener('click', () => closeMenu());
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu(false)));
+    document.addEventListener('keydown', e => {
+        if (!mobileMenu.classList.contains('open')) return;
+        if (e.key === 'Escape') closeMenu();
+        if (e.key === 'Tab') {
+            const items = [...mobileMenu.querySelectorAll('button, a[href]')];
+            const first = items[0], last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth > 768 && mobileMenu.classList.contains('open')) closeMenu(false); });
 
     // ── SCROLL REVEAL ──
     const reveals = document.querySelectorAll('.reveal');
@@ -1635,7 +1867,7 @@
         const target = parseFloat(el.dataset.count);
         const suffix = el.dataset.suffix || '';
         const decimals = parseInt(el.dataset.decimal || '0');
-        const duration = 1600;
+        const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 1600;
         const start = performance.now();
 
         function update(now) {
@@ -1643,9 +1875,9 @@
             const progress = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
             const current = eased * target;
-            el.textContent = current.toFixed(decimals) + suffix;
+            el.textContent = current.toLocaleString('pt-BR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) + suffix;
             if (progress < 1) requestAnimationFrame(update);
-            else el.textContent = target.toFixed(decimals) + suffix;
+            else el.textContent = target.toLocaleString('pt-BR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) + suffix;
         }
         requestAnimationFrame(update);
     }
